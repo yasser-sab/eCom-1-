@@ -8,15 +8,29 @@ class Home(View):
     def get(self,response):
         return render(response,'index.html')
 
-def Products(request):
-    return render(request, 'products.html')
 
-def SingleProduct(request):
-    return render(request, 'single-product.html')
+class Products(View):
+    def get(self,response):
+        return render(response, 'products.html')
 
-def Contact(request):
-    return render(request, 'contact.html')
+class SingleProduct(View):
+    def get(self,response)
+        return render(response, 'single-product.html')
 
-def About(request):
-    return render(request, 'about.html')
+class Contact(View):
+     def get(self,response):
+        return render(request, 'contact.html')
 
+class About(View):
+     def get(self,response)
+        return render(request, 'about.html')
+
+class Categorie(View):
+    def get(self,response,cat):
+        title = {
+            "men": "Men\'s",
+            "women": "Women's",
+            "kid": "Kid's",
+            "accessories": "Accessories",
+        }
+        return render(response,'categorie.html',{'categorie':cat,'title':title[cat]})
