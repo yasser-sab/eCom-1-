@@ -14,16 +14,16 @@ class Products(View):
         return render(response, 'products.html')
 
 class SingleProduct(View):
-    def get(self,response)
+    def get(self,response):
         return render(response, 'single-product.html')
 
 class Contact(View):
      def get(self,response):
-        return render(request, 'contact.html')
+        return render(response, 'contact.html')
 
 class About(View):
-     def get(self,response)
-        return render(request, 'about.html')
+     def get(self,response):
+        return render(response, 'about.html')
 
 class Categorie(View):
     def get(self,response,cat):
