@@ -8,6 +8,23 @@ class Home(View):
     def get(self,response):
         return render(response,'index.html')
 
+
+class Products(View):
+    def get(self,response):
+        return render(response, 'products.html')
+
+class SingleProduct(View):
+    def get(self,response):
+        return render(response, 'single-product.html')
+
+class Contact(View):
+     def get(self,response):
+        return render(response, 'contact.html')
+
+class About(View):
+     def get(self,response):
+        return render(response, 'about.html')
+
 class Categorie(View):
     def get(self,response,cat):
         title = {

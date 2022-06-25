@@ -24,7 +24,9 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
+
                         <a href="{% url 'home' %}" class="logo">
+
                             <img src="{% static '/assets/images/logo.png' %}">
                         </a>
                         <!-- ***** Logo End ***** -->
@@ -52,8 +54,8 @@
                                     <li><a href="{% url 'categorie' 'accessories' %}">Accessories</a></li>
                                 </ul>
                             </li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+                            <li><a href="{% url 'about_us' %}">About Us</a></li>
                             <!-- <li class="scroll-to-section"><a href="#explore">Explore</a></li> -->
                         </ul>        
                         <a class='menu-trigger'>
