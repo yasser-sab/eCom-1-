@@ -1,5 +1,12 @@
 {% load static %}
 
+{% url 'home' as home %}
+{% url 'products' as products %}
+{% url 'contact_us' as contact_us %}
+{% url 'about_us' as about_us %}
+{% url 'home' as home %}
+{% url 'categorie' 'Electrical' as c %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +39,8 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="{% url 'home' %}" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="{% url 'home' %}" class="{% if request.path == home %}active{% endif %}">Home</a></li>
+                            <li><a href="{% url 'products' %}" class="{% if request.path == products %}active{% endif %}">Latest Products</a></li>
                             <!-- <li class="scroll-to-section"><a href="#men">Men's</a></li> -->
                             <!-- <li class="scroll-to-section"><a href="#women">Women's</a></li> -->
                             <!-- <li class="scroll-to-section"><a href="#kids">Kid's</a></li> -->
@@ -46,16 +54,19 @@
                                 </ul>
                             </li> -->
                             <li class="submenu">
-                                <a href="javascript:;">Categories</a>
+                                <a href="javascript:;" class="{% if request.path == c %}active{% endif %}">Categories</a>
                                 <ul>
-                                    <li><a href="{% url 'categorie' 'men' %}">Men's</a></li>
+                                    {% for cat in Categories %}
+                                        <li><a href="{% url 'categorie' cat.name %}">{{cat.name}}</a></li>
+                                    {% endfor %}
+                                    <!-- <li><a href="{% url 'categorie' 'men' %}">Men's</a></li>
                                     <li><a href="{% url 'categorie' 'women' %}">Women's</a></li>
                                     <li><a href="{% url 'categorie' 'kid' %}">Kid's</a></li>
-                                    <li><a href="{% url 'categorie' 'accessories' %}">Accessories</a></li>
+                                    <li><a href="{% url 'categorie' 'accessories' %}">Accessories</a></li> -->
                                 </ul>
                             </li>
-                            <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
-                            <li><a href="{% url 'about_us' %}">About Us</a></li>
+                            <li><a href="{% url 'contact_us' %}" class="{% if request.path == contact_us %}active{% endif %}">Contact Us</a></li>
+                            <li><a href="{% url 'about_us' %}" class="{% if request.path == about_us %}active{% endif %}">About Us</a></li>
                             <!-- <li class="scroll-to-section"><a href="#explore">Explore</a></li> -->
                         </ul>        
                         <a class='menu-trigger'>
@@ -135,9 +146,10 @@
     
     <script src="{% static '/assets/js/jquery-2.1.0.min.js' %}"></script>
     <script src="{% static '/assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static '/assets/js/bootstrap.min.js' %}"></script>
     <script src="{% static '/assets/js/imgfix.min.js' %}"></script>
     <script src="{% static '/assets/js/accordions.js' %}"></script>
-    <script src="{% static '/assets/js/bootstrap.min.js' %}"></script>
+    
     <script src="{% static '/assets/js/datepicker.js' %}"></script>
     <script src="{% static '/assets/js/isotope.js' %}"></script>
     <script src="{% static '/assets/js/lightbox.js' %}"></script>
