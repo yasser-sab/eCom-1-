@@ -8,5 +8,6 @@ urlpatterns = [
     path('contact_us/', views.Contact.as_view(),name='contact_us'),
     path('about_us/', views.About.as_view(),name='about_us'),
     path('categorie/<str:cat>',views.Categorie.as_view(),name='categorie'),
-
+    path('cart/', views.Cart.as_view(),name='cart'),
+    path('cart/<int:id>', views.add,name='cardP'),
 ]

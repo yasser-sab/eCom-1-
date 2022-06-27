@@ -11,6 +11,10 @@
                 <div class="col-lg-8">
                 <div class="left-images">
                     <img src="{% static '/assets/images/single-product-01.jpg' %}" alt="">
+                    <img class="in-front" src="{% static '/assets/images/single-product-02.jpg' %}" alt="">
+                </div>
+                <div class="preview">
+                    <img src="{% static '/assets/images/single-product-01.jpg' %}" alt="">
                     <img src="{% static '/assets/images/single-product-02.jpg' %}" alt="">
                 </div>
             </div>
@@ -35,13 +39,16 @@
                         </div>
                         <div class="right-content">
                             <div class="quantity buttons_added">
-                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                <input type="button" value="-" class="minus">
+                                <input type="number" step="1" min="1" max="10" name="quantity" value="1" title="Qty" class="input-text qty text" >
+                                <!-- size="4" pattern="" inputmode="" -->
+                                <input type="button" value="+" class="plus">
                             </div>
                         </div>
                     </div>
                     <div class="total">
-                        <h4>Total: $210.00</h4>
-                        <div class="main-border-button"><a href="#">Add To Cart</a></div>
+                        <h4>Total: <small class="total_price"></small></h4>
+                        <div class="main-border-button"><a href="{% url 'cart' %}">Add To Cart</a></div>
                     </div>
                 </div>
             </div>
@@ -49,6 +56,64 @@
         </div>
     </section>
     <!-- ***** Product Area Ends ***** -->
+
+{% endblock %}
+
+{% block script %}
+
+    <script>
+        var pr=document.querySelector('#product .preview'),
+            img = pr.querySelectorAll('img'),
+            real=document.querySelector('#product .left-images'),
+            images=real.querySelectorAll('img');
+            
+        pr.addEventListener('click',function(e){
+            let t=e.target.src,
+                terget=t.substring(t.indexOf('static'));
+                images=real.querySelectorAll('img')
+            for(let item=0;item<images.length;item++){
+                images[item].classList.remove('in-front');
+            }
+            real.querySelector('img[src="/'+terget+'"]').classList.add('in-front')
+        })
+
+        var price = document.querySelector('span.price').innerHTML.replace("$",""),
+            total=document.querySelector('small.total_price'),
+            qte=document.querySelector('.buttons_added .qty').value;
+            
+
+        function calcuteTotal(q){
+            total.innerText="$"+(parseFloat(price)*parseInt(q)).toFixed(2);
+        }
+
+        calcuteTotal(parseFloat(qte));
+
+        var buttons = document.querySelector('.buttons_added');
+        
+        buttons.addEventListener('click',function(e){
+            
+            qte=parseInt(document.querySelector('.buttons_added .qty').value);
+            
+            if(qte>=1){
+                switch(e.target.getAttribute('class')){
+                    case 'plus':
+                        qte+=1;
+                        document.querySelector('.buttons_added .qty').setAttribute('value',qte);
+                        calcuteTotal(qte); 
+                    break;
+                    case 'minus':
+                        if(qte>1){
+                            qte-=1;
+                        }
+                        document.querySelector('.buttons_added .qty').setAttribute('value',qte);
+                        calcuteTotal(qte);break;
+                    default:break;
+                }
+            }
+        });
+
+        // console.log(total);
+    </script>
 
 {% endblock %}
     

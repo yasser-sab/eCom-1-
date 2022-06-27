@@ -6,6 +6,7 @@
 {% url 'about_us' as about_us %}
 {% url 'home' as home %}
 {% url 'categorie' 'Electrical' as c %}
+{% url 'cart' 'Electrical' as cart %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +21,8 @@
     <link rel="stylesheet" href="{% static '/assets/css/lightbox.css' %}">
     <link rel="stylesheet" href="{% static '/assets/css/owl-carousel.css' %}">
     <link rel="stylesheet" href="{% static '/assets/css/templatemo-hexashop.css' %}">
+
+    {% block style %}{% endblock %}
 
     <title>{% block title %}{% endblock %}</title>
 </head>
@@ -39,8 +42,8 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="{% url 'home' %}" class="{% if request.path == home %}active{% endif %}">Home</a></li>
-                            <li><a href="{% url 'products' %}" class="{% if request.path == products %}active{% endif %}">Latest Products</a></li>
+                            <li class="scroll-to-section"><a href="{% url 'home' %}" class="{% if request.path == home %}active{% endif %}"><i class="fa fa-home"></i>Home</a></li>
+                            <li><a href="{% url 'products' %}" class="{% if request.path == products %}active{% endif %}"><i class="fa fa-male"></i>Latest Products</a></li>
                             <!-- <li class="scroll-to-section"><a href="#men">Men's</a></li> -->
                             <!-- <li class="scroll-to-section"><a href="#women">Women's</a></li> -->
                             <!-- <li class="scroll-to-section"><a href="#kids">Kid's</a></li> -->
@@ -67,6 +70,7 @@
                             </li>
                             <li><a href="{% url 'contact_us' %}" class="{% if request.path == contact_us %}active{% endif %}">Contact Us</a></li>
                             <li><a href="{% url 'about_us' %}" class="{% if request.path == about_us %}active{% endif %}">About Us</a></li>
+                            <li><a href="{% url 'cart' %}" class="{% if request.path == cart %}active{% endif %}"><i class="fa fa-shopping-cart"><span>{{Cart|length}}</span></i>Cart</a></li>
                             <!-- <li class="scroll-to-section"><a href="#explore">Explore</a></li> -->
                         </ul>        
                         <a class='menu-trigger'>
@@ -160,6 +164,8 @@
     <script src="{% static '/assets/js/slick.js' %}"></script>
     <script src="{% static '/assets/js/waypoints.min.js' %}"></script>
     <script src="{% static '/assets/js/custom.js' %}"></script>
+
+    {% block script %}{% endblock %}
 
 </body>
 </html>
